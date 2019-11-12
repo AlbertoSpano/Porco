@@ -1,0 +1,11 @@
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\bin\Debug\Porco.exe.config
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\bin\Debug\Porco.exe
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\bin\Debug\Porco.pdb
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\bin\Debug\Porco.xml
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\obj\Debug\Porco.Resources.resources
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\obj\Debug\Porco.Porco.resources
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\obj\Debug\Porco.vbproj.GenerateResource.cache
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\obj\Debug\Porco.vbproj.CoreCompileInputs.cache
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\obj\Debug\Porco.exe
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\obj\Debug\Porco.xml
+D:\Programmi_in_elaborazione\Giulio\Porco\Porco\obj\Debug\Porco.pdb
