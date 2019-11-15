@@ -36,6 +36,8 @@ Partial Class Porco
         Me.chkPreposizioni = New System.Windows.Forms.CheckBox()
         Me.chkPreposizioniArticolate = New System.Windows.Forms.CheckBox()
         Me.chkCongiunzioni = New System.Windows.Forms.CheckBox()
+        Me.btnEsporta = New System.Windows.Forms.Button()
+        Me.btnEvidenzia = New System.Windows.Forms.Button()
         CType(Me.grdParole, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtMinLung, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -57,9 +59,9 @@ Partial Class Porco
         '
         Me.btnImporta.Location = New System.Drawing.Point(12, 12)
         Me.btnImporta.Name = "btnImporta"
-        Me.btnImporta.Size = New System.Drawing.Size(75, 23)
+        Me.btnImporta.Size = New System.Drawing.Size(119, 23)
         Me.btnImporta.TabIndex = 1
-        Me.btnImporta.Text = "Importa"
+        Me.btnImporta.Text = "Importa file"
         Me.btnImporta.UseVisualStyleBackColor = True
         '
         'OpenFileTxt
@@ -70,6 +72,7 @@ Partial Class Porco
         'btnConta
         '
         Me.btnConta.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnConta.Enabled = False
         Me.btnConta.Location = New System.Drawing.Point(961, 12)
         Me.btnConta.Name = "btnConta"
         Me.btnConta.Size = New System.Drawing.Size(75, 23)
@@ -81,6 +84,7 @@ Partial Class Porco
         '
         Me.grdParole.AllowUserToAddRows = False
         Me.grdParole.AllowUserToDeleteRows = False
+        Me.grdParole.AllowUserToResizeRows = False
         Me.grdParole.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdParole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -88,6 +92,7 @@ Partial Class Porco
         Me.grdParole.Name = "grdParole"
         Me.grdParole.ReadOnly = True
         Me.grdParole.RowHeadersVisible = False
+        Me.grdParole.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdParole.Size = New System.Drawing.Size(336, 380)
         Me.grdParole.TabIndex = 3
         '
@@ -179,11 +184,33 @@ Partial Class Porco
         Me.chkCongiunzioni.Text = "escludi congiunzioni"
         Me.chkCongiunzioni.UseVisualStyleBackColor = True
         '
+        'btnEsporta
+        '
+        Me.btnEsporta.Enabled = False
+        Me.btnEsporta.Location = New System.Drawing.Point(137, 12)
+        Me.btnEsporta.Name = "btnEsporta"
+        Me.btnEsporta.Size = New System.Drawing.Size(120, 23)
+        Me.btnEsporta.TabIndex = 13
+        Me.btnEsporta.Text = "Esporta elenco"
+        Me.btnEsporta.UseVisualStyleBackColor = True
+        '
+        'btnEvidenzia
+        '
+        Me.btnEvidenzia.Enabled = False
+        Me.btnEvidenzia.Location = New System.Drawing.Point(263, 12)
+        Me.btnEvidenzia.Name = "btnEvidenzia"
+        Me.btnEvidenzia.Size = New System.Drawing.Size(120, 23)
+        Me.btnEvidenzia.TabIndex = 14
+        Me.btnEvidenzia.Text = "Evidenzia parole"
+        Me.btnEvidenzia.UseVisualStyleBackColor = True
+        '
         'Porco
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1046, 462)
+        Me.Controls.Add(Me.btnEvidenzia)
+        Me.Controls.Add(Me.btnEsporta)
         Me.Controls.Add(Me.chkCongiunzioni)
         Me.Controls.Add(Me.chkPreposizioniArticolate)
         Me.Controls.Add(Me.chkPreposizioni)
@@ -221,4 +248,6 @@ Partial Class Porco
     Friend WithEvents chkPreposizioni As CheckBox
     Friend WithEvents chkPreposizioniArticolate As CheckBox
     Friend WithEvents chkCongiunzioni As CheckBox
+    Friend WithEvents btnEsporta As Button
+    Friend WithEvents btnEvidenzia As Button
 End Class

@@ -1,4 +1,19 @@
-﻿Public Class Porco
+﻿Imports OfficeOpenXml
+
+Public Class Porco
+
+    Private Property contato As Boolean
+        Get
+            Return _contato
+        End Get
+        Set
+            _contato = Value
+            btnConta.Enabled = Not _contato
+            btnEvidenzia.Enabled = contato
+            btnEsporta.Enabled = contato
+            If Not contato Then grdParole.DataSource = Nothing
+        End Set
+    End Property
 
     Private minChars As Integer = 4
     Private testo As String
@@ -6,6 +21,7 @@
     Private articoli As String() = {"il", "lo", "la", "i", "gli", "le", "un", "uno", "una", "l"}
     Private preposizioniarticolate As String() = {"del", "dell", "della", "dello", "delle", "degli", "al", "all", "allo", "alla", "alle", "agli", "ai", "dal", "dall", "dalla", "dallo", "dalle", "dagli", "nel", "nello", "nella", "nelle", "nei", "negli", "su", "sul", "sullo", "sulla", "sulle", "sui", "sugli"}
     Private congiunzioni As String() = {"e", "né", "nè", "se", "o", "ma", "anche", "neanche", "affinché", "affinchè"}
+    Private _contato As Boolean
 
     Private Sub Porco_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -13,13 +29,60 @@
 
     Private Sub btnImporta_Click(sender As Object, e As EventArgs) Handles btnImporta.Click
         If OpenFileTxt.ShowDialog = DialogResult.OK Then
-            testo = IO.File.ReadAllText(OpenFileTxt.FileName)
+            testo = IO.File.ReadAllText(OpenFileTxt.FileName, System.Text.Encoding.UTF7)
             Me.txtTesto.Text = testo
+            conta()
         End If
     End Sub
 
     Private Sub btnConta_Click(sender As Object, e As EventArgs) Handles btnConta.Click
+        conta()
+    End Sub
+
+    Private Sub txtMinLung_ValueChanged(sender As Object, e As EventArgs) Handles txtMinLung.ValueChanged
+        Me.lblDid.Text = String.Format("con lunghezza minina {0} caratteri", txtMinLung.Value)
+    End Sub
+
+    Private Sub btnEsporta_Click(sender As Object, e As EventArgs) Handles btnEsporta.Click
+
+        If grdParole.Rows.Count > 0 Then
+
+            ' .. file excel
+            Dim xls As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), String.Format("{0:yyyyMMddHHmmss}.xlsx", Now))
+
+            ' ... elenco
+            Dim ps As List(Of pCpunt) = CType(grdParole.DataSource, List(Of pCpunt))
+
+            ' ... crea file di excel
+            Using ex As New OfficeOpenXml.ExcelPackage(New IO.FileInfo(xls))
+
+                Dim worksheet As ExcelWorksheet = ex.Workbook.Worksheets.Add("Parole")
+
+                worksheet.Cells("A1").Value = "Parola"
+                worksheet.Cells("b1").Value = "Conteggio"
+
+                Dim r As Integer = 1
+
+                For Each p In ps
+                    r += 1
+                    worksheet.Cells(r, 1).Value = p.parola
+                    worksheet.Cells(r, 2).Value = p.count
+                Next
+
+                worksheet.Cells(worksheet.Dimension.Address).AutoFitColumns()
+                worksheet.Column(2).Style.Numberformat.Format = "#,##0"
+
+                ex.Save()
+
+            End Using
+
+        End If
+    End Sub
+
+    Private Sub conta()
+
         If Me.txtTesto.Text.Length > 0 Then
+
             Dim txt As String = Me.txtTesto.Text
             txt = txt.Replace("'", " ")
             txt = txt.Replace("`", " ")
@@ -72,12 +135,43 @@
             Dim ps As List(Of pCpunt) = parole.GroupBy(Function(x) x.ToUpper).Select(Function(g) New pCpunt With {.parola = g.Key, .count = g.Count}).OrderByDescending(Function(x) x.count).ThenBy(Function(x) x.parola).ToList
             grdParole.DataSource = ps
 
+            contato = True
+
         End If
+
     End Sub
 
-    Private Sub txtMinLung_ValueChanged(sender As Object, e As EventArgs) Handles txtMinLung.ValueChanged
-        Me.lblDid.Text = String.Format("con lunghezza minina {0} caratteri", txtMinLung.Value)
+    Private Sub btnEvidenzia_Click(sender As Object, e As EventArgs) Handles btnEvidenzia.Click
+
+        If Not contato Then conta()
+
+        Dim frm As New EvidenizaParole
+        frm.testo = Me.txtTesto.Text
+        frm.ps = CType(grdParole.DataSource, List(Of pCpunt))
+        frm.ShowDialog()
+
     End Sub
+
+    Private Sub txtTesto_TextChanged(sender As Object, e As EventArgs) Handles txtTesto.TextChanged
+        contato = False
+    End Sub
+
+    Private Sub chkArticoli_CheckedChanged(sender As Object, e As EventArgs) Handles chkArticoli.CheckedChanged
+        conta()
+    End Sub
+
+    Private Sub chkPreposizioni_CheckedChanged(sender As Object, e As EventArgs) Handles chkPreposizioni.CheckedChanged
+        conta()
+    End Sub
+
+    Private Sub chkPreposizioniArticolate_CheckedChanged(sender As Object, e As EventArgs) Handles chkPreposizioniArticolate.CheckedChanged
+        conta()
+    End Sub
+
+    Private Sub chkCongiunzioni_CheckedChanged(sender As Object, e As EventArgs) Handles chkCongiunzioni.CheckedChanged
+        conta()
+    End Sub
+
 End Class
 
 Public Class pCpunt

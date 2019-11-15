@@ -52,6 +52,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>..\RigheFileTxt\RigheFileTxt\bin\Release\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -77,6 +80,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EvidenizaParole.Designer.vb">
+      <DependentUpon>EvidenizaParole.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EvidenizaParole.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Porco.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +110,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EvidenizaParole.resx">
+      <DependentUpon>EvidenizaParole.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

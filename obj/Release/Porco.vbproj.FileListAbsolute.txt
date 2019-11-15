@@ -20,3 +20,6 @@ D:\Programmi_in_elaborazione\Giulio\Porco\obj\Release\Porco.vbproj.CoreCompileIn
 D:\Programmi_in_elaborazione\Giulio\Porco\obj\Release\Porco.exe
 D:\Programmi_in_elaborazione\Giulio\Porco\obj\Release\Porco.xml
 D:\Programmi_in_elaborazione\Giulio\Porco\obj\Release\Porco.pdb
+D:\Programmi_in_elaborazione\Giulio\Porco\bin\Release\EPPlus.dll
+D:\Programmi_in_elaborazione\Giulio\Porco\obj\Release\Porco.vbproj.CopyComplete
+D:\Programmi_in_elaborazione\Giulio\Porco\obj\Release\Porco.EvidenizaParole.resources
