@@ -10,7 +10,7 @@ Public Class Porco
             _contato = Value
             btnConta.Enabled = Not _contato
             btnEvidenzia.Enabled = contato
-            btnEsporta.Enabled = contato
+            lnkExcel.Enabled = contato
             If Not contato Then grdParole.DataSource = Nothing
         End Set
     End Property
@@ -22,6 +22,7 @@ Public Class Porco
     Private preposizioniarticolate As String() = {"del", "dell", "della", "dello", "delle", "degli", "al", "all", "allo", "alla", "alle", "agli", "ai", "dal", "dall", "dalla", "dallo", "dalle", "dagli", "nel", "nello", "nella", "nelle", "nei", "negli", "su", "sul", "sullo", "sulla", "sulle", "sui", "sugli"}
     Private congiunzioni As String() = {"e", "né", "nè", "se", "o", "ma", "anche", "neanche", "affinché", "affinchè"}
     Private _contato As Boolean
+    Dim xls As String
 
     Private Sub Porco_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -43,12 +44,14 @@ Public Class Porco
         Me.lblDid.Text = String.Format("con lunghezza minina {0} caratteri", txtMinLung.Value)
     End Sub
 
-    Private Sub btnEsporta_Click(sender As Object, e As EventArgs) Handles btnEsporta.Click
+    Private Sub Elenco()
 
         If grdParole.Rows.Count > 0 Then
 
             ' .. file excel
-            Dim xls As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), String.Format("{0:yyyyMMddHHmmss}.xlsx", Now))
+            xls = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), String.Format("{0:yyyyMMddHHmmss}.xlsx", Now))
+
+            If IO.File.Exists(xls) Then IO.File.Delete(xls)
 
             ' ... elenco
             Dim ps As List(Of pCpunt) = CType(grdParole.DataSource, List(Of pCpunt))
@@ -77,6 +80,7 @@ Public Class Porco
             End Using
 
         End If
+
     End Sub
 
     Private Sub conta()
@@ -135,6 +139,8 @@ Public Class Porco
             Dim ps As List(Of pCpunt) = parole.GroupBy(Function(x) x.ToUpper).Select(Function(g) New pCpunt With {.parola = g.Key, .count = g.Count}).OrderByDescending(Function(x) x.count).ThenBy(Function(x) x.parola).ToList
             grdParole.DataSource = ps
 
+            Elenco()
+
             contato = True
 
         End If
@@ -170,6 +176,10 @@ Public Class Porco
 
     Private Sub chkCongiunzioni_CheckedChanged(sender As Object, e As EventArgs) Handles chkCongiunzioni.CheckedChanged
         conta()
+    End Sub
+
+    Private Sub lnkExcel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkExcel.LinkClicked
+        System.Diagnostics.Process.Start(xls)
     End Sub
 
 End Class

@@ -36,8 +36,8 @@ Partial Class Porco
         Me.chkPreposizioni = New System.Windows.Forms.CheckBox()
         Me.chkPreposizioniArticolate = New System.Windows.Forms.CheckBox()
         Me.chkCongiunzioni = New System.Windows.Forms.CheckBox()
-        Me.btnEsporta = New System.Windows.Forms.Button()
         Me.btnEvidenzia = New System.Windows.Forms.Button()
+        Me.lnkExcel = New System.Windows.Forms.LinkLabel()
         CType(Me.grdParole, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtMinLung, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -184,33 +184,33 @@ Partial Class Porco
         Me.chkCongiunzioni.Text = "escludi congiunzioni"
         Me.chkCongiunzioni.UseVisualStyleBackColor = True
         '
-        'btnEsporta
-        '
-        Me.btnEsporta.Enabled = False
-        Me.btnEsporta.Location = New System.Drawing.Point(137, 12)
-        Me.btnEsporta.Name = "btnEsporta"
-        Me.btnEsporta.Size = New System.Drawing.Size(120, 23)
-        Me.btnEsporta.TabIndex = 13
-        Me.btnEsporta.Text = "Esporta elenco"
-        Me.btnEsporta.UseVisualStyleBackColor = True
-        '
         'btnEvidenzia
         '
         Me.btnEvidenzia.Enabled = False
-        Me.btnEvidenzia.Location = New System.Drawing.Point(263, 12)
+        Me.btnEvidenzia.Location = New System.Drawing.Point(151, 12)
         Me.btnEvidenzia.Name = "btnEvidenzia"
         Me.btnEvidenzia.Size = New System.Drawing.Size(120, 23)
         Me.btnEvidenzia.TabIndex = 14
         Me.btnEvidenzia.Text = "Evidenzia parole"
         Me.btnEvidenzia.UseVisualStyleBackColor = True
         '
+        'lnkExcel
+        '
+        Me.lnkExcel.AutoSize = True
+        Me.lnkExcel.Location = New System.Drawing.Point(293, 17)
+        Me.lnkExcel.Name = "lnkExcel"
+        Me.lnkExcel.Size = New System.Drawing.Size(67, 13)
+        Me.lnkExcel.TabIndex = 15
+        Me.lnkExcel.TabStop = True
+        Me.lnkExcel.Text = "elenco excel"
+        '
         'Porco
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1046, 462)
+        Me.Controls.Add(Me.lnkExcel)
         Me.Controls.Add(Me.btnEvidenzia)
-        Me.Controls.Add(Me.btnEsporta)
         Me.Controls.Add(Me.chkCongiunzioni)
         Me.Controls.Add(Me.chkPreposizioniArticolate)
         Me.Controls.Add(Me.chkPreposizioni)
@@ -248,6 +248,6 @@ Partial Class Porco
     Friend WithEvents chkPreposizioni As CheckBox
     Friend WithEvents chkPreposizioniArticolate As CheckBox
     Friend WithEvents chkCongiunzioni As CheckBox
-    Friend WithEvents btnEsporta As Button
     Friend WithEvents btnEvidenzia As Button
+    Friend WithEvents lnkExcel As LinkLabel
 End Class
